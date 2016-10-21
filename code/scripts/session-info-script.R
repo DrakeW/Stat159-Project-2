@@ -1,5 +1,6 @@
 library(xtable)
 library(testthat)
 library(glmnet)
+library(pls)
 sink(file = "session-info.txt")
 sessionInfo()

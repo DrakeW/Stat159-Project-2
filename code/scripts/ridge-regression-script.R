@@ -20,14 +20,13 @@ dev.off()
 # model selection
 min_lambda <- ridge.mod$lambda.min
 best_fit <- glmnet(train_x, train_y, intercept = FALSE, standardize = FALSE, lambda = min_lambda, alpha = 0)
-save(best_fit, file = "data/betst-ridge-model.RData")
 
 ### TEST ###
 test_x <- as.matrix(test_data)[,c(-1,-13)]
 target_y <- test_data$Balance
 # test set prediction -- MSE
 ridge.pred <- predict(best_fit, newx = test_x)
-test_mse <- mean((ridge.pred - target_y)^2)
+ridge_test_mse <- mean((ridge.pred - target_y)^2)
 
 ### FULL DATASET ###
 full_x <- as.matrix(full_data)[,c(-1,-13)]
@@ -37,5 +36,5 @@ official_fit <- glmnet(full_x, full_y, intercept = FALSE, standardize = FALSE, l
 official_coef <- coef(official_fit)
 
 # save RData
-save(ridge.mod, min_lambda, test_mse, official_coef, file = "data/ridge-models.RData")
+save(ridge.mod, min_lambda, ridge_test_mse, official_coef, file = "data/ridge-models.RData")
 
