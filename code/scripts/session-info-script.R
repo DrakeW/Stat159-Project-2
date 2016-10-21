@@ -1,0 +1,5 @@
+library(xtable)
+library(testthat)
+library(glmnet)
+sink(file = "session-info.txt")
+sessionInfo()
