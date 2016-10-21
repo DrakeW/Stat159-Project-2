@@ -25,8 +25,8 @@ pcr_test_mse <- mean((pcr.pred - target_y)^2)
 
 ### FULL DATASET ###
 official_fit <- pcr(Balance~., data = full_data[,-1], ncomp = best_comp_num)
-official_coef <- coef(official_fit)
+pcr_official_coef <- coef(official_fit)
 
 # save RData
-save(pcr.fit, best_comp_num, pcr_test_mse, official_coef, file = "data/pcr-models.RData")
+save(pcr.fit, best_comp_num, pcr_test_mse, pcr_official_coef, file = "data/regressions/pcr-models.RData")
 
