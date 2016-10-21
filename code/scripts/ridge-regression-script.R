@@ -33,8 +33,8 @@ full_x <- as.matrix(full_data)[,c(-1,-13)]
 full_y <- full_data$Balance
 
 official_fit <- glmnet(full_x, full_y, intercept = FALSE, standardize = FALSE, lambda = min_lambda, alpha = 0)
-official_coef <- coef(official_fit)
+ridge_official_coef <- coef(official_fit)
 
 # save RData
-save(ridge.mod, min_lambda, ridge_test_mse, official_coef, file = "data/ridge-models.RData")
+save(ridge.mod, min_lambda, ridge_test_mse, ridge_official_coef, file = "data/regressions/ridge-models.RData")
 
