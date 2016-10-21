@@ -14,3 +14,8 @@ other attached packages:
 loaded via a namespace (and not attached):
 [1] magrittr_1.5     R6_2.2.0         tools_3.3.1      crayon_1.3.2     codetools_0.2-14 grid_3.3.1      
 [7] iterators_1.0.8  lattice_0.20-33 
+[1] 13
+[1] 13
+[1] 13
+[1] 13
+[1] 0.01
