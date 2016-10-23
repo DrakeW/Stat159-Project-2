@@ -150,5 +150,30 @@ boxplot(credit_data$Balance, main="Boxplot of Balance", xlab="Balance")
 dev.off() 
 
 #Qualitative Variables 
+##Frequency Table 
+frequency_count_table <- table(credit_data$Gender, credit_data$Married, credit_data$Student, credit_data$Ethnicity) 
+frequency_proportion_table <- prop.table(frequency_count_table)
+frequency_table <- merge(frequency_count_table, frequency_proportion_table, by=c("Var1", "Var2", "Var3", "Var4"))
+colnames(frequency_table)<- c("Gender", "Married", "Student", "Ethnicity", "Frequency", "Relative Frequency")
 
+sink("../../data/eda-output.txt")
+print("Frequency Table")
+print(frequency_table)
+sink()
 
+##Barcharts 
+png("../../images/ethnicity_barchart.png")
+barchart(table(credit_data$Ethnicity), main="Frequency of Ethnicity")
+dev.off()
+
+png("../../images/student_barchart.png")
+barchart(table(credit_data$Student), main="Frequency of Student")
+dev.off()
+
+png("../../images/married_barchart.png")
+barchart(table(credit_data$Married), main="Frequency of Married")
+dev.off()
+
+png("../../images/gender_barchart.png")
+barchart(table(credit_data$Gender), main="Frequency of Gender")
+dev.off()
