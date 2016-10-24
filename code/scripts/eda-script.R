@@ -3,17 +3,11 @@ credit_data <- read.csv("../../data/Credit.csv")
 #Quantitative variables 
 
 ##Income 
-income_min <- min(credit_data$Income)
-income_max <- max(credit_data$Income)
-income_range <- income_max - income_min
 
-income_median <- median(credit_data$Income)
-income_first_quartile <- quantile(credit_data$Income)[2]
-income_third_quartile <- quantile(credit_data$Income)[4]
-income_interquartile_range <- IQR(credit_data$Income)
-
-income_mean <- mean(credit_data$Income)
-income_std_dev <- sd(credit_data$Income)
+income_stats <- c(min(credit_data$Income),max(credit_data$Income), (max(credit_data$Income)-min(credit_data$Income)), median(credit_data$Income), quantile(credit_data$Income)[2], quantile(credit_data$Income)[4],IQR(credit_data$Income),mean(credit_data$Income),sd(credit_data$Income))
+names(income_stats) <- c("Min", "Max", "Range", "Median", "First Quartile", "Third Quartile", "IQR", "Mean", "Std. Deviation")
+income_stats <- as.data.frame(round(income_stats, digits=0))
+colnames(income_stats) <- "Income"
 
 png("../../images/income_histogram.png")
 hist(credit_data$Income, main="Histogram of Income", xlab="Income")
@@ -24,17 +18,10 @@ boxplot(credit_data$Income, main="Boxplot of Income", xlab="Income")
 dev.off() 
 
 ##Limit
-limit_min <- min(credit_data$Limit)
-limit_max <- max(credit_data$Limit)
-limit_range <- limit_max - limit_min
-
-limit_median <- median(credit_data$Limit)
-limit_first_quartile <- quantile(credit_data$Limit)[2]
-limit_third_quartile <- quantile(credit_data$Limit)[4]
-limit_interquartile_range <- IQR(credit_data$Limit)
-
-limit_mean <- mean(credit_data$Limit)
-limit_std_dev <- sd(credit_data$Limit)
+limit_stats <- c(min(credit_data$Limit),max(credit_data$Limit), (max(credit_data$Limit)-min(credit_data$Limit)), median(credit_data$Limit), quantile(credit_data$Limit)[2], quantile(credit_data$Limit)[4],IQR(credit_data$Limit),mean(credit_data$Limit),sd(credit_data$Limit))
+names(limit_stats) <- c("Min", "Max", "Range", "Median", "First Quartile", "Third Quartile", "IQR", "Mean", "Std. Deviation")
+limit_stats <- as.data.frame(round(limit_stats, digits=0))
+colnames(limit_stats) <- "Limit"
 
 png("../../images/limit_histogram.png")
 hist(credit_data$Limit, main="Histogram of Limit", xlab="Limit")
@@ -45,17 +32,11 @@ boxplot(credit_data$Limit, main="Boxplot of Limit", xlab="Limit")
 dev.off() 
 
 ##Rating
-rating_min <- min(credit_data$Rating)
-rating_max <- max(credit_data$Rating)
-rating_range <- rating_max - rating_min
 
-rating_median <- median(credit_data$Rating)
-rating_first_quartile <- quantile(credit_data$Rating)[2]
-rating_third_quartile <- quantile(credit_data$Rating)[4]
-rating_interquartile_range <- IQR(credit_data$Rating)
-
-rating_mean <- mean(credit_data$Rating)
-rating_std_dev <- sd(credit_data$Rating)
+rating_stats <- c(min(credit_data$Rating),max(credit_data$Rating), (max(credit_data$Rating)-min(credit_data$Rating)), median(credit_data$Rating), quantile(credit_data$Rating)[2], quantile(credit_data$Rating)[4],IQR(credit_data$Rating),mean(credit_data$Rating),sd(credit_data$Rating))
+names(rating_stats) <- c("Min", "Max", "Range", "Median", "First Quartile", "Third Quartile", "IQR", "Mean", "Std. Deviation")
+rating_stats <- as.data.frame(round(rating_stats, digits=0))
+colnames(rating_stats) <- "Rating"
 
 png("../../images/rating_histogram.png")
 hist(credit_data$Rating, main="Histogram of Rating", xlab="Rating")
@@ -66,17 +47,11 @@ boxplot(credit_data$Rating, main="Boxplot of Rating", xlab="Rating")
 dev.off() 
 
 ##Cards 
-cards_min <- min(credit_data$Cards)
-cards_max <- max(credit_data$Cards)
-cards_range <- cards_max - cards_min
 
-cards_median <- median(credit_data$Cards)
-cards_first_quartile <- quantile(credit_data$Cards)[2]
-cards_third_quartile <- quantile(credit_data$Cards)[4]
-cards_interquartile_range <- IQR(credit_data$Cards)
-
-cards_mean <- mean(credit_data$Cards)
-cards_std_dev <- sd(credit_data$Cards)
+cards_stats <- c(min(credit_data$Cards),max(credit_data$Cards), (max(credit_data$Cards)-min(credit_data$Cards)), median(credit_data$Cards), quantile(credit_data$Cards)[2], quantile(credit_data$Cards)[4],IQR(credit_data$Cards),mean(credit_data$Cards),sd(credit_data$Cards))
+names(cards_stats) <- c("Min", "Max", "Range", "Median", "First Quartile", "Third Quartile", "IQR", "Mean", "Std. Deviation")
+cards_stats <- as.data.frame(round(cards_stats,digits=0))
+colnames(cards_stats) <- "Cards"
 
 png("../../images/cards_histogram.png")
 hist(credit_data$Cards, main="Histogram of Cards", xlab="Cards")
@@ -87,17 +62,11 @@ boxplot(credit_data$Cards, main="Boxplot of Cards", xlab="Cards")
 dev.off() 
 
 ##Age
-age_min <- min(credit_data$Age)
-age_max <- max(credit_data$Age)
-age_range <- age_max - age_min
 
-age_median <- median(credit_data$Age)
-age_first_quartile <- quantile(credit_data$Age)[2]
-age_third_quartile <- quantile(credit_data$Age)[4]
-age_interquartile_range <- IQR(credit_data$Age)
-
-age_mean <- mean(credit_data$Age)
-age_std_dev <- sd(credit_data$Age)
+age_stats <- c(min(credit_data$Age),max(credit_data$Age), (max(credit_data$Age)-min(credit_data$Age)), median(credit_data$Age), quantile(credit_data$Age)[2], quantile(credit_data$Age)[4],IQR(credit_data$Age),mean(credit_data$Age),sd(credit_data$Age))
+names(age_stats) <- c("Min", "Max", "Range", "Median", "First Quartile", "Third Quartile", "IQR", "Mean", "Std. Deviation")
+age_stats <- as.data.frame(round(age_stats, digits=0))
+colnames(age_stats) <- "Age"
 
 png("../../images/age_histogram.png")
 hist(credit_data$Age, main="Histogram of Age", xlab="Age")
@@ -108,38 +77,26 @@ boxplot(credit_data$Age, main="Boxplot of Age", xlab="Age")
 dev.off() 
 
 ##Education
-education_min <- min(credit_data$Education)
-education_max <- max(credit_data$Education)
-education_range <- education_max - education_min
 
-education_median <- median(credit_data$Education)
-education_first_quartile <- quantile(credit_data$Education)[2]
-education_third_quartile <- quantile(credit_data$Education)[4]
-education_interquartile_range <- IQR(credit_data$Education)
-
-education_mean <- mean(credit_data$Education)
-education_std_dev <- sd(credit_data$Education)
+education_stats <- c(min(credit_data$Education),max(credit_data$Education), (max(credit_data$Education)-min(credit_data$Education)), median(credit_data$Education), quantile(credit_data$Education)[2], quantile(credit_data$Education)[4],IQR(credit_data$Education),mean(credit_data$Education),sd(credit_data$Education))
+names(education_stats) <- c("Min", "Max", "Range", "Median", "First Quartile", "Third Quartile", "IQR", "Mean", "Std. Deviation")
+education_stats <- as.data.frame(round(education_stats, digits=0))
+colnames(education_stats) <- "Education"
 
 png("../../images/education_histogram.png")
 hist(credit_data$Education, main="Histogram of Education", xlab="Education")
 dev.off() 
 
-png("../../education/income_boxplot.png")
+png("../../education/education_boxplot.png")
 boxplot(credit_data$Education, main="Boxplot of Education", xlab="Education")
 dev.off() 
 
 ##Balance
-balance_min <- min(credit_data$Balance)
-balance_max <- max(credit_data$Balance)
-balance_range <- balance_max - balance_min
 
-balance_median <- median(credit_data$Balance)
-balance_first_quartile <- quantile(credit_data$Balance)[2]
-balance_third_quartile <- quantile(credit_data$Balance)[4]
-balance_interquartile_range <- IQR(credit_data$Balance)
-
-balance_mean <- mean(credit_data$Balance)
-balance_std_dev <- sd(credit_data$Balance)
+balance_stats <- c(min(credit_data$Balance),max(credit_data$Balance), (max(credit_data$Balance)-min(credit_data$Balance)), median(credit_data$Balance), quantile(credit_data$Balance)[2], quantile(credit_data$Balance)[4],IQR(credit_data$Balance),mean(credit_data$Balance),sd(credit_data$Balance))
+names(balance_stats) <- c("Min", "Max", "Range", "Median", "First Quartile", "Third Quartile", "IQR", "Mean", "Std. Deviation")
+balance_stats <- as.data.frame(round(balance_stats, digits=0))
+colnames(balance_stats) <- "Balance"
 
 png("../../images/balance_histogram.png")
 hist(credit_data$Balance, main="Histogram of Balance", xlab="Balance")
@@ -149,6 +106,9 @@ png("../../images/balance_boxplot.png")
 boxplot(credit_data$Balance, main="Boxplot of Balance", xlab="Balance")
 dev.off() 
 
+##Descriptive Statistics Summary
+descriptive_var_stats <- data.frame(income_stats, limit_stats, rating_stats, cards_stats, age_stats, education_stats, balance_stats)
+
 #Qualitative Variables 
 ##Frequency Table 
 frequency_count_table <- table(credit_data$Gender, credit_data$Married, credit_data$Student, credit_data$Ethnicity) 
@@ -157,6 +117,8 @@ frequency_table <- merge(frequency_count_table, frequency_proportion_table, by=c
 colnames(frequency_table)<- c("Gender", "Married", "Student", "Ethnicity", "Frequency", "Relative Frequency")
 
 sink("../../data/eda-output.txt")
+print("Descriptive Statistics")
+print(descriptive_var_stats)
 print("Frequency Table")
 print(frequency_table)
 sink()
