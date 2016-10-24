@@ -168,7 +168,7 @@ png("../../images/ethnicity-boxplot.png")
 plot(credit_data$Ethnicity, credit_data$Balance, xlab="Ethnicity", ylab="Balance", main="Boxplot of Balance over Ethnicity")
 dev.off()
 
-##eda-output.txt
+#eda-output.txt
 sink("../../data/eda-output.txt")
 print("Descriptive Statistics")
 print(descriptive_var_stats)
@@ -177,5 +177,6 @@ print(frequency_table)
 print("Correlation Matrix")
 print(correlation_matrix)
 sink()                         
-                          
-                  
+
+#save Rdata
+save(descriptive_var_stats, frequency_table, correlation_matrix, file="../../data/eda-output.Rdata")                 
