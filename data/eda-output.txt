@@ -1,0 +1,46 @@
+[1] "Descriptive Statistics"
+               Income Limit Rating Cards Age Education Balance
+Min                10   855     93     1  23         5       0
+Max               187 13913    982     9  98        20    1999
+Range             176 13058    889     8  75        15    1999
+Median             33  4622    344     3  56        14     460
+First Quartile     21  3088    247     2  42        11      69
+Third Quartile     57  5873    437     4  70        16     863
+IQR                36  2785    190     2  28         5     794
+Mean               45  4736    355     3  56        13     520
+Std. Deviation     35  2308    155     1  17         3     460
+[1] "Frequency Table"
+   Gender Married Student        Ethnicity Frequency Relative Frequency
+1    Male      No      No African American        18             0.0450
+2    Male      No      No            Asian        16             0.0400
+3    Male      No      No        Caucasian        33             0.0825
+4    Male      No     Yes African American         2             0.0050
+5    Male      No     Yes            Asian         3             0.0075
+6    Male      No     Yes        Caucasian         4             0.0100
+7    Male     Yes      No African American        26             0.0650
+8    Male     Yes      No            Asian        27             0.0675
+9    Male     Yes      No        Caucasian        57             0.1425
+10   Male     Yes     Yes African American         3             0.0075
+11   Male     Yes     Yes            Asian         1             0.0025
+12   Male     Yes     Yes        Caucasian         3             0.0075
+13 Female      No      No African American        25             0.0625
+14 Female      No      No            Asian        10             0.0250
+15 Female      No      No        Caucasian        33             0.0825
+16 Female      No     Yes African American         2             0.0050
+17 Female      No     Yes            Asian         3             0.0075
+18 Female      No     Yes        Caucasian         6             0.0150
+19 Female     Yes      No African American        20             0.0500
+20 Female     Yes      No            Asian        36             0.0900
+21 Female     Yes      No        Caucasian        59             0.1475
+22 Female     Yes     Yes African American         3             0.0075
+23 Female     Yes     Yes            Asian         6             0.0150
+24 Female     Yes     Yes        Caucasian         4             0.0100
+[1] "Correlation Matrix"
+        X Income Limit Rating  Cards   Age Balance
+X       1  0.037 0.024  0.022 -0.036 0.059  0.0061
+Income         1  0.79   0.79 -0.018  0.18    0.46
+Limit                1      1   0.01   0.1    0.86
+Rating                      1  0.053   0.1    0.86
+Cards                              1 0.043   0.086
+Age                                      1  0.0018
+Balance                                          1
