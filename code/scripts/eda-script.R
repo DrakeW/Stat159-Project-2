@@ -116,12 +116,6 @@ frequency_proportion_table <- prop.table(frequency_count_table)
 frequency_table <- merge(frequency_count_table, frequency_proportion_table, by=c("Var1", "Var2", "Var3", "Var4"))
 colnames(frequency_table)<- c("Gender", "Married", "Student", "Ethnicity", "Frequency", "Relative Frequency")
 
-sink("../../data/eda-output.txt")
-print("Descriptive Statistics")
-print(descriptive_var_stats)
-print("Frequency Table")
-print(frequency_table)
-sink()
 
 ##Barcharts 
 png("../../images/ethnicity_barchart.png")
@@ -139,3 +133,49 @@ dev.off()
 png("../../images/gender_barchart.png")
 barchart(table(credit_data$Gender), main="Frequency of Gender")
 dev.off()
+
+#Correlation Matrix
+mat <- signif(cor(credit_data[c(1:6, 12)]),2)
+mat[lower.tri(mat)]=""
+correlation_matrix <- data.frame(mat)
+
+#Scatterplot Matrix 
+png("../../images/scatterplot_matrix.png")
+pairs(credit_data[c(1:6, 12)], pch=16, cex=.5, main="Scatterplot Matrix of Variables")
+dev.off()
+ 
+#ANOVAs 
+gender_anova <- aov(Balance ~ Gender, data=credit_data)
+student_anova <- aov(Balance ~ Student, data=credit_data)
+married_anova <- aov(Balance ~ Married, data=credit_data)
+ethnicity_anova <- aov(Balance ~ Ethnicity, data=credit_data)
+
+#Boxplots
+png("../../images/gender_boxplot.png")
+plot(credit_data$Gender, credit_data$Balance, xlab="Gender", ylab="Balance", main="Boxplot of Balance over Gender")
+dev.off()
+
+png("../../images/student_boxplot.png")
+plot(credit_data$Student, credit_data$Balance, xlab="Student", ylab="Balance", main="Boxplot of Balance over Student")
+dev.off()
+
+
+png("../../images/married_boxplot.png")
+plot(credit_data$Married, credit_data$Balance, xlab="Married", ylab="Balance", main="Boxplot of Balance over Married")
+dev.off()
+
+png("../../images/ethnicity_boxplot.png")
+plot(credit_data$Ethnicity, credit_data$Balance, xlab="Ethnicity", ylab="Balance", main="Boxplot of Balance over Ethnicity")
+dev.off()
+
+##eda-output.txt
+sink("../../data/eda_output.txt")
+print("Descriptive Statistics")
+print(descriptive_var_stats)
+print("Frequency Table")
+print(frequency_table)
+print("Correlation Matrix")
+print(correlation_matrix)
+sink()                         
+                          
+                  
