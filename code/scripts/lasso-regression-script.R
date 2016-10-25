@@ -1,9 +1,9 @@
 library(glmnet)
 
 # read in data
-train_data <- read.csv("../../data/train-data.csv")
-test_data <- read.csv("../../data/test-data.csv")
-full_data <- read.csv("../../data/scaled-credit.csv")
+train_data <- read.csv("data/train-data.csv")
+test_data <- read.csv("data/test-data.csv")
+full_data <- read.csv("data/scaled-credit.csv")
 
 ### TRAIN ###
 train_x <- as.matrix(train_data)[,c(-1,-13)]
@@ -13,7 +13,7 @@ set.seed(100)
 lasso.mod <- cv.glmnet(train_x, train_y, intercept = FALSE, standardize = FALSE, lambda = grid, alpha = 1)
 
 # save plot
-png("../../images/lasso-models-plot.png")
+png("images/lasso-models-plot.png")
 plot(lasso.mod, main = "Lasso Models Plot")
 dev.off()
 
@@ -36,5 +36,5 @@ official_fit <- glmnet(full_x, full_y, intercept = FALSE, standardize = FALSE, l
 lasso_official_coef <- coef(official_fit)
 
 # save RData
-save(lasso.mod, min_lambda, lasso_test_mse, lasso_official_coef, file = "../../data/regressions/lasso-models.RData")
+save(lasso.mod, min_lambda, lasso_test_mse, lasso_official_coef, file = "data/regressions/lasso-models.RData")
 
