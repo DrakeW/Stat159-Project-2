@@ -26,3 +26,6 @@ f_statistic <- function(lm){
   p <- length(lm$coefficients) - 1
   return(((TSS - RSS)/p)/(RSS/(n-p-1)))
 }
+
+#save RData 
+save(residual_sum_squares, total_sum_squares, r_squared, residual_std_error, f_statistic, file="../../data/regression-functions.RData")
