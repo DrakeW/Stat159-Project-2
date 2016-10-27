@@ -59,7 +59,7 @@ This project can be reproduced by following the instructions below.
 5. `make` to generate new artifact
 6. open `report.pdf` with PDF viewer of your choice
 
-`Make` summary
+`Make` Summary
 ---
 This section includes description of different make commands that you can use to reproduce corresponding part of this project
 
