@@ -13,6 +13,9 @@ data: $(data_cleaning_script) $(train_test_split_script)
 	cd data && curl -O http://www-bcf.usc.edu/~gareth/ISL/Credit.csv
 	RScript $(data_cleaning_script)
 	RScript $(train_test_split_script)
+	
+tests: code/test-that.R code/tests/test-regression.R
+	Rscript code/test-that.R 
 
 # run exploratory data analysis on downloaded data set
 eda: code/scripts/eda-script.R 
@@ -58,6 +61,7 @@ report:
 # convert report to slides
 slides:
 	Rscript -e "library(rmarkdown); render('report/report.Rmd', 'ioslides_presentation')"
+	cd report && mv report.html ../slides/slides.html
 
 # remove existing report and slides
 clean:
