@@ -1,3 +1,5 @@
+source("../functions/regression-functions.R")
+
 #unit tests for functions 
 context("Test for RSS")
 test_that("Residual Sum of Squares Works", {
