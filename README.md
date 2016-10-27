@@ -51,6 +51,7 @@ Stat159-Project-2/
 Instruction to Reproduce
 ---
 This project can be reproduced by following the instructions below.
+
 1. Download/Clone this project from GitHub (unzip if downloaded file is in zip format)
 2. Open **terminal** or any shell program that supports standard **linux commands**
 3. `cd Stat159-Project-2`
@@ -61,6 +62,7 @@ This project can be reproduced by following the instructions below.
 `Make` summary
 ---
 This section includes description of different make commands that you can use to reproduce corresponding part of this project
+
 1. `make all` reproduce the entire projects -- download data, run regression analysis, aseemble report etc
 2. `make data` downlaod data from internet, run data cleaning script, split data into train set and test set
 3. `make eda` run exploratory data analysis script
