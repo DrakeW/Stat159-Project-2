@@ -1,0 +1,25 @@
+
+# Methods
+
+We applied the following 3 methods which has a total of 5 regression models to our dataset.
+
+### Ordinary Least Square methods
+
+In statistics, OLS is a method for estimating the coefficients in a linear regression model, with the goal of minimizing the sum of the squares of the differences between the observed responses in the given dataset and those predicted by the linear model.
+
+1. **Ordinary Least Squares (OLS)**: This is a common liear regression model, and we use it as a benchmark to evaluate the performance of the other 4 regression models. 
+
+### Shrinkage methods
+
+Shrinkage methods invovles fitting a model with all P predictor. However, the estimated coefficients are shrunken towards 0 relative to the least squares estimates. Shrinkage has the effect of reducing variance. Since after the process of shrinkage, some of the coefficients might be exactly 0, it also performs variable selection.
+
+1. **Ridge Regression (Ridge)**: 
+
+2. **Lasso Regression (Lasso)**
+
+### Dimension Reduction methods
+
+Dimension reduction works by _projecting_ the P predictors onto a M-dimensional space, where M < P. This is achieved by computing M different linear combinations, or projections, of the variables. Then these M projections are used as predictors to fit a linear regression model by least squares.
+
+1. **Principle Components Regression (PCR)**
+2. **Partial Least Square Regression (PLSR)**
