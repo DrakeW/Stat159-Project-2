@@ -18,7 +18,7 @@ tests: code/test-that.R code/tests/test-regression.R
 	Rscript code/test-that.R 
 
 # run exploratory data analysis on downloaded data set
-eda: code/scripts/eda-script.R 
+eda: code/scripts/eda-script.R $(DATA)
 	RScript $<
 
 # exploring data through simple linear regression 
