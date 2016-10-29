@@ -55,7 +55,7 @@ session: code/scripts/session-info-script.R
 
 # assemble sections of report into one and convert it to PDF format
 report:
-	cd report; pandoc -o report.Rmd $(report_sections)
+	cd report; cat $(report_sections) > report.Rmd
 	Rscript -e "library(rmarkdown); render('report/report.Rmd', 'pdf_document')"
 	
 # convert report to slides

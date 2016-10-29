@@ -1,16 +1,23 @@
-<h1 id="abstract">Abstract</h1>
-<p>We perform a predictive modeling process applied on the data set Credit in order to decipher how factors such as Income, Age, Education, and more influence the amount of credit card debt to a person. Our analysis is based off of Chapter 6 from <em>An Introduction to Statistical Learning</em>, &quot;Linear Model Selection and Regularization&quot;.</p>
-<h1 id="data">Data</h1>
-<p>The Credit data set we will be using comes from <em>An Introduction to Statistical Learning</em>, contains the following variables: Income, Limit, Rating, Cards, Age, Education, Gender, Student, Married, Ethnicity and Balance. The Credit data set records Balance, the average credit card debt for an individual, according to quantitative predictors such as Income, Limit, etc. and qualitative predictors such as Student, Married, etc. Cards represents the number of credit cards a person has and Income is represented in the thousands of dollars. We investigate 400 individuals in this analysis.</p>
-<h1 id="analysis">Analysis</h1>
-<h2 id="data-processing">Data Processing</h2>
-<p>In order to conduct our analysis, we first began with some pre-modeling data processing. The two main actions we performed before applying our models were:</p>
-<ol style="list-style-type: decimal">
-<li>Dummying out categorical variable</li>
-<li>Mean centering and standardizing all the variables</li>
-</ol>
-<p>For step 1, we took our categorical, or qualitative variables, namely <code>Student</code>, <code>Married</code>, <code>Gender</code>, and <code>Ethnicity</code> and <em>dummied</em> them out. What this means is that the values for the variables were factored and then given binary indicators. The reason for this is you can not apply regression models, specifically the lasso and ridge regressions that we used from the <code>glmnet</code> package, to variables that are non numeric. We used the <code>model.matrix()</code> function to perform step 1.</p>
-<p>For step 2, we standardized our data so that each variable would have a mean of 0 and standard deviation of 1. The purpose of this is to standardize across different scales, so that coefficients such as <span class="math inline">${\hat\beta_0}$</span> do not vary based on whether they're calculated in pounds or ounces, etc. To do so, we used the <code>scale()</code> function.</p>
-<h2 id="training-and-testing-data-sets">Training and Testing Data Sets</h2>
-<p>Another step we took before building our model was to take a set of data for model building and another for testing model performance. The set of data used to build the model, our <em>training set</em>, was 300 events randomly selected using the <code>sample()</code> function. For our test set, we randomly selected 100 events, this time using the <code>set.seed()</code> function for reproducibility.</p>
-<h2 id="model-building-process">Model Building Process</h2>
+#Abstract
+We perform a predictive modeling process applied on the data set Credit in order to decipher how factors such as Income, Age, Education, and more influence the amount of credit card debt to a person. Our analysis is based off of Chapter 6 from *An Introduction to Statistical Learning*, "Linear Model Selection and Regularization".  
+#Data
+
+The Credit data set we will be using comes from *An Introduction to Statistical Learning*, contains the following variables: Income, Limit, Rating, Cards, Age, Education, Gender, Student, Married, Ethnicity and Balance. The Credit data set records Balance, the average credit card debt for an individual, according to quantitative predictors such as Income, Limit, etc. and qualitative predictors such as Student, Married, etc. Cards represents the number of credit cards a person has and Income is represented in the thousands of dollars. We investigate 400 individuals in this analysis.  
+#Analysis 
+
+##Data Processing
+
+In order to conduct our analysis, we first began with some pre-modeling data processing. The two main actions we performed before applying our models were: 
+
+1. Dummying out categorical variable 
+2. Mean centering and standardizing all the variables 
+
+For step 1, we took our categorical, or qualitative variables, namely `Student`, `Married`, `Gender`, and `Ethnicity` and *dummied* them out. What this means is that the values for the variables were factored and then given binary indicators. The reason for this is you can not apply regression models, specifically the lasso and ridge regressions that we used from the `glmnet` package, to variables that are non numeric. We used the `model.matrix()` function to perform step 1. 
+
+For step 2, we standardized our data so that each variable would have a mean of 0 and standard deviation of 1. The purpose of this is to standardize across different scales, so that coefficients such as ${\hat\beta_0}$ do not vary based on whether they're calculated in pounds or ounces, etc. To do so, we used the `scale()` function.
+
+##Training and Testing Data Sets 
+
+Another step we took before building our model was to take a set of data for model building and another for testing model performance. The set of data used to build the model, our *training set*, was 300 events randomly selected using the `sample()` function. For our test set, we randomly selected 100 events, this time using the `set.seed()` function for reproducibility. 
+
+##Model Building Process 
