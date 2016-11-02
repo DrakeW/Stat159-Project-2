@@ -60,8 +60,7 @@ report:
 	
 # convert report to slides
 slides:
-	Rscript -e "library(rmarkdown); render('report/report.Rmd', 'ioslides_presentation')"
-	cd report && mv report.html ../slides/slides.html
+	Rscript -e "library(rmarkdown); render('slides/slides.Rmd', 'ioslides_presentation')"
 
 # remove existing report and slides
 clean:
