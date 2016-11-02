@@ -50,8 +50,8 @@ regressions:
 	make plsr
 
 # generate session information including system spec and required packages
-session: code/scripts/session-info-script.R
-	RScript $<
+session:
+	bash session.sh
 
 # assemble sections of report into one and convert it to PDF format
 report:
