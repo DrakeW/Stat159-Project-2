@@ -3,7 +3,7 @@
 
 ##Exploratory Data Analysis Results
 
-```{r, results='asis', echo=FALSE}
+```{r, echo=FALSE}
 library(Matrix)
 load("../data/regressions/ridge-models.RData")
 load("../data/regressions/lasso-models.RData")

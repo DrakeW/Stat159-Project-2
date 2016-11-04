@@ -72,7 +72,7 @@ For each of our regressions we fit the model to our *training set* after perform
 
 ##Exploratory Data Analysis Results
 
-```{r, results='asis', echo=FALSE}
+```{r, echo=FALSE}
 library(Matrix)
 load("../data/regressions/ridge-models.RData")
 load("../data/regressions/lasso-models.RData")
@@ -96,10 +96,11 @@ print(xtable(correlation_matrix, caption=c("Correlation Matrix")), comment=F)
 
 ##Regression Results 
 
-After applying our regressions to our full data sets, we received the following coefficients for our various regression models. While the coefficients obviously vary across the different models, we can notice trends comparing all together. Across all regression models, the predictor that had the largest affect on Balance was `Limit`. Again across the PLSR, PCR, ridge and lasso regressions we can note that the estimates for ${\hat\beta_4, \hat\beta_5, \hat\beta_6}$ corresponding to `Age`, `Education`, and `Gender` respectively are all nearly 0. This indicates that these variables do not largely factor in to the `Balance` of a person's credit card debt. As credit card company's cannot discriminate in their providing of credit to people of different genders, ages, or amount of education it makes sense that these estimates are lower.
+After applying our regressions to our full data sets, we received the following coefficients for our various regression models. While the coefficients obviously vary across the different models, we can notice trends comparing all together. Across all regression models, the predictor that had the largest affect on Balance was `Limit`. Again across the PLSR, PCR, ridge and lasso regressions we can note that the estimates for ${\hat\beta_4, \hat\beta_5, \hat\beta_6}$ corresponding to `Age`, `Education`, and `Gender` respectively are all nearly 0. This indicates that these variables do not largely factor in to the `Balance` of a person's credit card debt. As credit card company's cannot discriminate in their providing of credit to people of different genders, ages, or with different amounts of education it makes sense that these estimates are lower.
 
 ```{r, results='asis', echo=FALSE}
 print(xtable(round(all_coefficients,2), caption=c("Information about Regression Coefficients")), comment=F)
 ```
+
 
 # Conclusions
