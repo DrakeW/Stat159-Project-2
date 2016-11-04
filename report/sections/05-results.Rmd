@@ -9,13 +9,14 @@ load("../data/regressions/ridge-models.RData")
 load("../data/regressions/lasso-models.RData")
 load("../data/regressions/plsr-models.RData")
 load("../data/regressions/pcr-models.RData")
+load("../data/regressions/ols-model.RData")
 load("../data/eda-output.RData")
 ridgesum <- summary(ridge_official_coef)
 lassosum <- summary(lasso_official_coef)
 ridge_coefficients <- data.frame(Ridge = ridgesum$x)
 lasso_coefficients <- data.frame(Lasso  = lassosum$x)
-all_coefficients <- data.frame(plsr_official_coef, pcr_official_coef, ridge_coefficients, lasso_coefficients)
-colnames(all_coefficients) <- c("PLSR", "PCR", "Ridge", "Lasso")
+all_coefficients <- data.frame(plsr_official_coef, pcr_official_coef, ridge_coefficients, lasso_coefficients, ols_coeff[2:12])
+colnames(all_coefficients) <- c("PLSR", "PCR", "Ridge", "Lasso", "OLS")
 ```
 
 The results of our exploratory data analysis showed that certain variables in our study were much more important when examining the `Balance` of credit card debt. Two of the variables were highly correlated with the `Balance`, a person's credit `Limit` and credit `Rating`. This is understandable the higher a person's credit rating, generally the higher their credit limit is as well which means they are at liberty to spend more leading to higher balances. Below is the correlation matrix for all of the numeric variables: 
@@ -33,4 +34,25 @@ After applying our regressions to our full data sets, we received the following 
 print(xtable(round(all_coefficients,2), caption=c("Information about Regression Coefficients")), comment=F)
 ```
 
+Another enlightening way to look at these coefficients is through a bar chart. The bar chart below shows the regression coefficients for each variable divided up by the regression model used. From this visualization, it's easy to note that `Income` is another strongly correlated variable, except negative. This means that an increase in `Income` is associated with a decrease in `Balance`. Therefore, when a person's income increases their credit card debt decreases, most likely because they can make larger payments towards their balance. 
+
+```{r  echo=FALSE, warning=FALSE}
+library(reshape2)
+library(ggplot2)
+all_coefficients$id <- 1:nrow(all_coefficients)
+dat <- melt(all_coefficients,id.vars = "id")
+t <- ggplot(dat,aes(x=factor(id), y = value))
+
+coeff_graph <- t + facet_wrap(~variable)+geom_bar(aes(fill = factor(id)), stat = "identity") + scale_fill_discrete(name="Variable", labels=c("Income", "Limit", "Rating", "Cards", "Age", "Education", "GenderFemale", "StudentYes", "MarriedYes", "EthnicityAsian", "EthnicityCaucasian")) + theme(axis.ticks = element_blank(), axis.text.x = element_blank()) + xlab(label="variable")
+print(coeff_graph)
+
+```
+
+In order to see if the PLSR, PCR, Ridge, Lasso, or OLS regression is the best fit for our data set, we can examine the Mean Square Error to examine the quality of the regressions. While all the models had relatively close MSEs, the two that were the lowest were the PCR and OLS regressions. Therefore, it would appear these were the most suitable for predicting the Credit data set. 
+
+```{r, results='asis', echo=FALSE}
+mse <- data.frame(ridge_test_mse, lasso_test_mse, pcr_test_mse, plsr_test_mse, ols_mse)
+colnames(mse) <- c("Ridge", "Lasso", "PCR", "PLSR", "OLS")
+print(xtable(mse,caption=c("Mean Square Errors"),digits = 4), comment=F )
+```
 
