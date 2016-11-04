@@ -33,19 +33,136 @@ Our prediction goal is to find the best model that fits the data. And using this
 - Dimension Reduction Method
     - Principal Component Regression (PCR)
     - Partial Least Square Regression (PLSR)
+    
+## Methods | Least Square Method
 
-## Analysis -- Slide with R Output
+In statistics, OLS is a method for estimating the coefficients in a linear regression model, with the goal of minimizing the sum of the squares of the differences between the observed responses in the given dataset and those predicted by the linear model. (i.e.  $RSS = \sum_{i=1}^n(y_i - \beta_0 - \sum_{j=1}^p(\beta_{j}x_{ij}))^2$, where $\beta_0 ... \beta_p$ are the coefficients estimate)
 
-```{r cars, echo = TRUE}
-summary(cars)
+**_Ordinary Least Squares (OLS)_** is a common liear regression model, and we use it as a benchmark to evaluate the performance of the other 4 regression models. 
+
+## Methods | Shrinkage Methods
+
+Shrinkage methods invovles fitting a model with all P predictor. However, the estimated coefficients are shrunken towards 0 relative to the least squares estimates. Shrinkage has the effect of reducing variance. Since after the process of shrinkage, some of the coefficients might be exactly 0, it also performs variable selection.
+
+## Methods | Shrinkage Methods - Ridge Regression
+
+- Ridge regression is very similar to least square, except that the coefficients are estimatated by minimizing $RSS + \lambda \sum \beta_j^2$. 
+- The second part of this equation, $\lambda \sum \beta_j^2$, is called the _shrinkage penalty_. And the shrinkage penalty gets smaller as coefficients get closer to 0.
+- $\lambda$ here is called the tuning parameter, and $\lambda \geq 0$. When $\lambda = 0$, Ridge regression is the same as OLS. As $\lambda$ grows larger, the impact of shrinkage penalty grows bigger as well.
+
+## Methods | Shrinkage Methods - Lasso Regression
+
+- Lasso regression is an alternative to Ridge
+- it overcomes oen of Ridge's disadvantage, that even though it uses all P predictors and even though it moves all coefficients close to 0, it won't set any of them to be exactly 0 unless $\lambda$ is infinity and this disadvantage creates obstacles on model interpretation when P gets really large. 
+- Lasso regression minimizes $RSS + \lambda \sum |{\beta_j}|$. And it is the 2nd term that forces some of the coefficients estimates to be exactly 0.
+
+## Methods | Dimension Reduction Methods
+
+Dimension reduction works by _projecting_ the P predictors onto a M-dimensional space, where M < P. This is achieved by computing M different linear combinations, or projections, of the variables. Then these M projections are used as predictors to fit a linear regression model by least squares.
+
+## Methods | Dimension Reduction Methods - Principal Components Regression (PCR)
+
+- The PCR approach involves constructing the first M principal components, $Z_1, Z_2,...,Z_M$, and then using those principle components as predictors in a linear regression model that uses least squares method. 
+- This approach reduces dimension because of the fact that usually a samller amount ($M < P$) of principal components are sufficient to explain most of the variabilities in the dataset, as well as the relationship with the response. 
+- PCR is an _unsupervised_ approach
+
+## Methods | Dimension Reduction Methods - Partial Least Square Regression (PLSR)
+
+- PLSR is a _supervised_ alternative to PCR. 
+- It first identifies a new set of features $Z_1, Z_2,...,Z_M$ that are linear combinations of the original features, and then fits a linear model using least squares method with those M features. 
+- The difference is PLSR identifies $Z_1, Z_2,...Z_M$ in a _supervised_ way, which means it makes use of the response Y while identifying new features
+
+## Analysis | Data Processing
+
+In order to conduct our analysis, we first began with some pre-modeling data processing. The two main actions we performed before applying our models were: 
+
+1. Dummying out categorical variable 
+2. Mean centering and standardizing all the variables 
+
+## Analysis | Training and Testing Data Sets
+
+Another step we took before building our model was to take a set of data for model building and another for testing model performance. The set of data used to build the model, our *training set*, was 300 events randomly selected using the `sample()` function. For our *test set*, we randomly selected 100 events, this time using the `set.seed()` function for reproducibility. 
+
+## Analysis | Model Building Process 
+
+- For each of our regressions we fit the model to our *training set* after performing 10-fold-cross-validation and resampling the data. 
+- After we have fit the functions to our data, we selected the best fit model
+- Once we selected our best models, we use our *test set* to compute the Mean Square Error to compare all of our best models. 
+- Finally to finish off our regressions we used the *full set* of data to get our *actual* coefficients for the models.
+
+## Results | Exploratory Data Analysis Results
+
+```{r, echo=FALSE}
+library(Matrix)
+load("../data/regressions/ridge-models.RData")
+load("../data/regressions/lasso-models.RData")
+load("../data/regressions/plsr-models.RData")
+load("../data/regressions/pcr-models.RData")
+load("../data/regressions/ols-model.RData")
+load("../data/eda-output.RData")
+ridgesum <- summary(ridge_official_coef)
+lassosum <- summary(lasso_official_coef)
+ridge_coefficients <- data.frame(Ridge = ridgesum$x)
+lasso_coefficients <- data.frame(Lasso  = lassosum$x)
+all_coefficients <- data.frame(plsr_official_coef, pcr_official_coef, ridge_coefficients, lasso_coefficients, ols_coeff[2:12])
+colnames(all_coefficients) <- c("PLSR", "PCR", "Ridge", "Lasso", "OLS")
+```
+The results of our exploratory data analysis showed that certain variables in our study were much more important when examining the `Balance` of credit card debt. Two of the variables were highly correlated with the `Balance`, a person's credit `Limit` and credit `Rating`. This is understandable the higher a person's credit rating, generally the higher their credit limit is as well which means they are at liberty to spend more leading to higher balances. Below is the correlation matrix for all of the numeric variables: 
+
+## Results | Exploratory Data Analysis Results
+
+```{r, results='asis', echo=FALSE}
+library(xtable)
+options(xtable.comment = FALSE,
+        xtable.table.placement = "H")
+print(xtable(correlation_matrix, caption=c("Correlation Matrix")), comment=F, , type="html")
 ```
 
-## Analysis --  Slide with Plot
+## Results | Regression Results 
 
-```{r pressure}
-plot(pressure)
+After applying our regressions to our full data sets, we received the following coefficients for our various regression models. While the coefficients obviously vary across the different models, we can notice trends comparing all together.
+
+## Results | Regression Results 
+
+```{r, results='asis', echo=FALSE}
+print(xtable(round(all_coefficients,2), caption=c("Information about Regression Coefficients")), comment=F, type="html")
+```
+
+## Results| Regression Results
+
+Across all regression models, the predictor that had the largest affect on Balance was `Limit`. Again across the PLSR, PCR, ridge and lasso regressions we can note that the estimates for ${\hat\beta_4, \hat\beta_5, \hat\beta_6}$ corresponding to `Age`, `Education`, and `Gender` respectively are all nearly 0. This indicates that these variables do not largely factor in to the `Balance` of a person's credit card debt. As credit card company's cannot discriminate in their providing of credit to people of different genders, ages, or with different amounts of education it makes sense that these estimates are lower.
+
+## Results| Regression Results
+
+Another enlightening way to look at these coefficients is through a bar chart. 
+
+## Results| Regression Results
+
+```{r  echo=FALSE, warning=FALSE}
+library(reshape2)
+library(ggplot2)
+all_coefficients$id <- 1:nrow(all_coefficients)
+dat <- melt(all_coefficients,id.vars = "id")
+t <- ggplot(dat,aes(x=factor(id), y = value))
+
+coeff_graph <- t + facet_wrap(~variable)+geom_bar(aes(fill = factor(id)), stat = "identity") + scale_fill_discrete(name="Variable", labels=c("Income", "Limit", "Rating", "Cards", "Age", "Education", "GenderFemale", "StudentYes", "MarriedYes", "EthnicityAsian", "EthnicityCaucasian")) + theme(axis.ticks = element_blank(), axis.text.x = element_blank()) + xlab(label="variable")
+print(coeff_graph)
+```
+
+## Results| Regression Results
+
+The bar chart shows the regression coefficients for each variable divided up by the regression model used. From this visualization, it's easy to note that `Income` is another strongly correlated variable, except negative. This means that an increase in `Income` is associated with a decrease in `Balance`. Therefore, when a person's income increases their credit card debt decreases, most likely because they can make larger payments towards their balance.
+
+## Results| Regression Results
+
+In order to see if the PLSR, PCR, Ridge, Lasso, or OLS regression is the best fit for our data set, we can examine the Mean Square Error to examine the quality of the regressions. While all the models had relatively close MSEs, the two that were the lowest were the PCR and OLS regressions. Therefore, it would appear these were the most suitable for predicting the Credit data set. 
+
+```{r, results='asis', echo=FALSE}
+mse <- data.frame(ridge_test_mse, lasso_test_mse, pcr_test_mse, plsr_test_mse, ols_mse)
+colnames(mse) <- c("Ridge", "Lasso", "PCR", "PLSR", "OLS")
+print(xtable(mse,caption=c("Mean Square Errors"),digits = 4), comment=F, type="html")
 ```
 
 ## Conclusion
 
-Here is the conclusion
+In conclusion, the regression models that most accurately fit our data set were the OLS and PCR regressions. However, the difference in error between these and the other regressions was not statistically significant. Some of the most valuable insight came from comparing across all of the regression models. For example, we were able to see that variables such as credit limit, credit rating, and income drastically affected balance across all five regression models. Much of this data is aligned with intuitions regarding credit card debt, such as the higher your limit the higher your balance may be. 
