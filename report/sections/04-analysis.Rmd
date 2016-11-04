@@ -1,4 +1,5 @@
 
+
 #Analysis 
 
 ### Data Processing
@@ -14,6 +15,9 @@ For step 2, we standardized our data so that each variable would have a mean of 
 
 ### Training and Testing Data Sets 
 
-Another step we took before building our model was to take a set of data for model building and another for testing model performance. The set of data used to build the model, our *training set*, was 300 events randomly selected using the `sample()` function. For our test set, we randomly selected 100 events, this time using the `set.seed()` function for reproducibility. 
+Another step we took before building our model was to take a set of data for model building and another for testing model performance. The set of data used to build the model, our *training set*, was 300 events randomly selected using the `sample()` function. For our *test set*, we randomly selected 100 events, this time using the `set.seed()` function for reproducibility. 
 
 ### Model Building Process 
+
+For each of our regressions we fit the model to our *training set* after performing 10-fold-cross-validation and resampling the data. For the lasso and ridge regressions, we use the function `cv.glmnet()` to apply the model and perform the cross validation whereas with the PCR and PLSR regression models, we simply use the `pcr()` and `plsr()` functions and set the `validation` argument to `"CV"`. After we have fit the functions to our data, we selected the best fit model looking for the minimum values of `$lambda.min` for the lasso and ridge regressions and of `$validation$PRESS` for the PLSR and PCR regressions. Once we selected our best models, `best_comp_num` in our PCR and PLSR regressions and `min_lambda` in our ridge and lasso regressions, we use our *test set* to compute the Mean Square Error to compare all of our best models. Finally to finish off our regressions we used the *full set* of data to get our *actual* coefficients for the models. The full data set was used in combination with our regression functions to compute summary statistics such as $R^{2}$, F-Statistic, and more. 
+
