@@ -32,7 +32,7 @@ lasso_test_mse <- mean((lasso.pred - target_y)^2)
 full_x <- as.matrix(full_data)[,c(-1,-13)]
 full_y <- full_data$Balance
 
-official_fit <- glmnet(full_x, full_y, intercept = FALSE, standardize = FALSE, lambda = min_lambda, alpha = 1)
+official_fit <- glmnet(full_x, full_y, intercept = FALSE, standardize = FALSE, lambda = min_lambda, alpha = 0)
 lasso_official_coef <- coef(official_fit)
 
 # save RData
