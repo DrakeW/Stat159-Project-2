@@ -3,8 +3,7 @@ train_data <- read.csv("data/train-data.csv")
 test_data <- read.csv("data/test-data.csv")
 full_data <- read.csv("data/scaled-credit.csv")
 
-#load in RData for regression functions 
-load("data/regression-functions.Rdata")
+source(file = "code/functions/regression-functions.R")
 
 # train model based on train data
 ols.mod <- lm(Balance~., data = train_data[,-1])

@@ -65,4 +65,5 @@ slides:
 # remove existing report and slides
 clean:
 	rm -f report/report.pdf
-	rm -f report/report.html
+	rm -f slides/slides.html
+	
