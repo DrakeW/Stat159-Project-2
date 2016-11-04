@@ -58,7 +58,7 @@ report:
 	cd report; cat $(report_sections) > report.Rmd
 	Rscript -e "library(rmarkdown); render('report/report.Rmd', 'pdf_document')"
 	
-# convert report to slides
+# generate slides
 slides:
 	Rscript -e "library(rmarkdown); render('slides/slides.Rmd', 'ioslides_presentation')"
 
